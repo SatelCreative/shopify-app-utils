@@ -18,7 +18,7 @@
     "pushArgs": "",
     "pushRepo": null,
     "beforeStartCommand": false,
-    "afterReleaseCommand": "npm publish --access public",
+    "afterReleaseCommand": false,
     "addUntrackedFiles": false
   },
   "npm": {
