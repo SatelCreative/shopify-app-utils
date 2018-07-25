@@ -61,11 +61,11 @@
   "prompt": {
     "src": {
       "status": false,
+      "publish": true,
       "commit": true,
       "tag": true,
       "push": true,
-      "release": true,
-      "publish": true
+      "release": true
     },
     "dist": {
       "status": false,
