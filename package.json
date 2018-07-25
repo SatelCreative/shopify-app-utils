@@ -1,23 +1,54 @@
 {
-  "name": "shopify-app-utils",
+  "name": "@satel/shopify-app-utils",
+  "description": "Authentication & Validation for Shopify Apps",
+  "keywords": [
+    "shopify",
+    "express",
+    "middleware",
+    "hmac",
+    "signature"
+  ],
   "version": "0.0.0",
   "main": "lib/index.js",
+  "license": "MIT",
   "repository": "git@github.com:SatelCreative/shopify-app-utils.git",
   "author": "Quinn Blenkinsop <quinn@qw-in.com>",
-  "private": true,
+  "files": [
+    "LICENCE",
+    "README.md",
+    "lib/"
+  ],
+  "engines": {
+    "node": ">=8.6.0"
+  },
   "devDependencies": {
+    "documentation": "^8.0.2",
+    "dotenv-cli": "^1.4.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^13.0.0",
-    "eslint-plugin-import": "^2.13.0",
     "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-jest": "^21.18.0",
     "eslint-plugin-prettier": "^2.6.2",
     "jest": "^23.4.1",
     "jest-junit": "^5.1.0",
-    "prettier": "^1.13.7"
+    "prettier": "^1.13.7",
+    "release-it": "^7.4.8"
   },
   "scripts": {
+    "lint": "eslint src/**/*.js",
     "test": "jest --coverage",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "docs": "documentation readme -s Documentation lib/index.js --config documentation.yml",
+    "release:full": "dotenv release-it --",
+    "release:beta": "dotenv release-it -- --preRelease=beta",
+    "release:rc": "dotenv release-it -- --preRelease=rc"
+  },
+  "jest-junit": {
+    "suiteName": "jest tests",
+    "classNameTemplate": "{title}",
+    "titleTemplate": "{classname}",
+    "ancestorSeparator": " › ",
+    "usePathForSuiteName": "true"
   }
 }
