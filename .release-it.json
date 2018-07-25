@@ -18,13 +18,11 @@
     "pushArgs": "",
     "pushRepo": null,
     "beforeStartCommand": false,
-    "afterReleaseCommand": false,
+    "afterReleaseCommand": "echo test",
     "addUntrackedFiles": false
   },
   "npm": {
-    "publish": true,
-    "private": false
-
+    "publish": false
   },
   "github": {
     "release": true,
@@ -65,7 +63,7 @@
       "commit": true,
       "tag": true,
       "push": true,
-      "release": true
+      "release": false
     },
     "dist": {
       "status": false,
