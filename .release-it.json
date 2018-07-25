@@ -22,7 +22,9 @@
     "addUntrackedFiles": false
   },
   "npm": {
-    "publish": true
+    "publish": true,
+    "private": false
+
   },
   "github": {
     "release": true,
