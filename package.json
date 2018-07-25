@@ -1,0 +1,23 @@
+{
+  "name": "shopify-app-utils",
+  "version": "0.0.0",
+  "main": "lib/index.js",
+  "repository": "git@github.com:SatelCreative/shopify-app-utils.git",
+  "author": "Quinn Blenkinsop <quinn@qw-in.com>",
+  "private": true,
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^13.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-jest": "^21.18.0",
+    "eslint-plugin-prettier": "^2.6.2",
+    "jest": "^23.4.1",
+    "jest-junit": "^5.1.0",
+    "prettier": "^1.13.7"
+  },
+  "scripts": {
+    "test": "jest --coverage",
+    "test:watch": "jest --watch"
+  }
+}
