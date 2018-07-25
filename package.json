@@ -51,9 +51,9 @@
     "test": "jest --coverage",
     "test:watch": "jest --watch",
     "docs": "documentation readme -s Documentation lib/index.js --config documentation.yml",
-    "release:full": "dotenv release-it -- && npm publish --access public",
-    "release:beta": "dotenv release-it -- --preRelease=beta && npm publish --access public",
-    "release:rc": "dotenv release-it -- --preRelease=rc && npm publish --access public"
+    "release:full": "dotenv release-it --",
+    "release:beta": "dotenv release-it -- --preRelease=beta",
+    "release:rc": "dotenv release-it -- --preRelease=rc"
   },
   "jest-junit": {
     "suiteName": "jest tests",
