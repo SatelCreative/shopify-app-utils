@@ -8,7 +8,7 @@
     "hmac",
     "signature"
   ],
-  "version": "0.0.0",
+  "version": "0.0.1-beta.0",
   "main": "lib/index.js",
   "license": "MIT",
   "repository": "git@github.com:SatelCreative/shopify-app-utils.git",

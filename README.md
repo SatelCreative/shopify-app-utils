@@ -2,7 +2,7 @@
 
 Provides functionality for some of the more tedious requirements when building a Shopify app such as consistent hmac validation behavior for authentication, proxies, etc. It is mostly built as express-style middleware but if there is demand could easily be provided in a generic form as well.
 
-This is not meant to be a *batteries included* solution. For that checkout [`shopify-express`](https://github.com/Shopify/shopify-express)
+This is not meant to be a _batteries included_ solution. For that checkout [`shopify-express`](https://github.com/Shopify/shopify-express)
 
 # Installation
 
