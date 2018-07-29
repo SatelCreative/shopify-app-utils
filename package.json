@@ -8,7 +8,7 @@
     "hmac",
     "signature"
   ],
-  "version": "1.0.0",
+  "version": "0.0.1-beta.7",
   "main": "lib/index.js",
   "license": "MIT",
   "repository": {
