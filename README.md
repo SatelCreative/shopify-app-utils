@@ -23,14 +23,15 @@ or
 -   [computeHMAC](#computehmac)
     -   [Parameters](#parameters)
     -   [Examples](#examples)
--   [validateAuthHMAC](#validateauthhmac)
+-   [validateShopifyDomain](#validateshopifydomain)
     -   [Parameters](#parameters-1)
     -   [Examples](#examples-1)
--   [validateProxyHMAC](#validateproxyhmac)
+-   [validateAuthHMAC](#validateauthhmac)
     -   [Parameters](#parameters-2)
     -   [Examples](#examples-2)
--   [validateShopifyDomain](#validateshopifydomain)
+-   [validateProxyHMAC](#validateproxyhmac)
     -   [Parameters](#parameters-3)
+    -   [Examples](#examples-3)
 
 ## computeHMAC
 
@@ -52,6 +53,23 @@ const hash = computeHMAC({
 ```
 
 Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+
+## validateShopifyDomain
+
+Checks if a string is a valid `.myshopify.com` domain (exclude the protocol)
+
+### Parameters
+
+-   `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+    -   `options.shop` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+
+### Examples
+
+```javascript
+const validShopifyDomain = validateShopifyDomain({ shop: 'my-shop.myshopify.com' });
+```
+
+Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** 
 
 ## validateAuthHMAC
 
@@ -102,16 +120,5 @@ app.use(req => {
   const validHMAC = validateProxyHMAC({ url: req.url, secret: 'hush' });
 });
 ```
-
-Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** 
-
-## validateShopifyDomain
-
-Checks if a string is a valid `.myshopify.com` domain (exclude the protocol)
-
-### Parameters
-
--   `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
-    -   `options.shop` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 
 Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** 
