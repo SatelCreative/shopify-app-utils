@@ -1,6 +1,6 @@
 # About
 
-Provides functionality for some of the more tedious requirements when building a Shopify app such as consistent hmac validation behavior for authentication, proxies, etc. It is mostly built as express-style middleware but if there is demand could easily be provided in a generic form as well.
+Provides functionality for some of the more tedious requirements when building a Shopify app such as consistent hmac validation behavior for authentication, proxies, etc. Provided as general use functions but can easily be adapted for use as express middleware.
 
 This is not meant to be a _batteries included_ solution. For that checkout [`shopify-express`](https://github.com/Shopify/shopify-express)
 
@@ -23,15 +23,14 @@ or
 -   [computeHMAC](#computehmac)
     -   [Parameters](#parameters)
     -   [Examples](#examples)
--   [validateShopifyDomain](#validateshopifydomain)
+-   [validateAuthHMAC](#validateauthhmac)
     -   [Parameters](#parameters-1)
     -   [Examples](#examples-1)
--   [validateAuthHMAC](#validateauthhmac)
+-   [validateProxyHMAC](#validateproxyhmac)
     -   [Parameters](#parameters-2)
     -   [Examples](#examples-2)
--   [validateProxyHMAC](#validateproxyhmac)
+-   [validateShopifyDomain](#validateshopifydomain)
     -   [Parameters](#parameters-3)
-    -   [Examples](#examples-3)
 
 ## computeHMAC
 
@@ -53,23 +52,6 @@ const hash = computeHMAC({
 ```
 
 Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
-
-## validateShopifyDomain
-
-Checks if a string is a valid `.myshopify.com` domain (exclude the protocol)
-
-### Parameters
-
--   `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
-    -   `options.shop` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
-
-### Examples
-
-```javascript
-const validShopifyDomain = validateShopifyDomain({ shop: 'my-shop.myshopify.com' });
-```
-
-Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** 
 
 ## validateAuthHMAC
 
@@ -120,5 +102,16 @@ app.use(req => {
   const validHMAC = validateProxyHMAC({ url: req.url, secret: 'hush' });
 });
 ```
+
+Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** 
+
+## validateShopifyDomain
+
+Checks if a string is a valid `.myshopify.com` domain (exclude the protocol)
+
+### Parameters
+
+-   `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+    -   `options.shop` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 
 Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** 
