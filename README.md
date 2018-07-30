@@ -1,6 +1,6 @@
 # About
 
-Provides functionality for some of the more tedious requirements when building a Shopify app such as consistent hmac validation behavior for authentication, proxies, etc. It is mostly built as express-style middleware but if there is demand could easily be provided in a generic form as well.
+Provides functionality for some of the more tedious requirements when building a Shopify app such as consistent hmac validation behavior for authentication, proxies, etc. Provided as general use functions but can easily be adapted for use as express middleware.
 
 This is not meant to be a _batteries included_ solution. For that checkout [`shopify-express`](https://github.com/Shopify/shopify-express)
 
@@ -23,12 +23,15 @@ or
 -   [computeHMAC](#computehmac)
     -   [Parameters](#parameters)
     -   [Examples](#examples)
--   [authHMACMiddleware](#authhmacmiddleware)
+-   [validateShopifyDomain](#validateshopifydomain)
     -   [Parameters](#parameters-1)
     -   [Examples](#examples-1)
--   [proxyHMACMiddleware](#proxyhmacmiddleware)
+-   [validateAuthHMAC](#validateauthhmac)
     -   [Parameters](#parameters-2)
     -   [Examples](#examples-2)
+-   [validateProxyHMAC](#validateproxyhmac)
+    -   [Parameters](#parameters-3)
+    -   [Examples](#examples-3)
 
 ## computeHMAC
 
@@ -51,54 +54,71 @@ const hash = computeHMAC({
 
 Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 
-## authHMACMiddleware
+## validateShopifyDomain
+
+Checks if a string is a valid `.myshopify.com` domain (exclude the protocol)
+
+### Parameters
+
+-   `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+    -   `options.shop` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+
+### Examples
+
+```javascript
+const validShopifyDomain = validateShopifyDomain({ shop: 'my-shop.myshopify.com' });
+```
+
+Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** 
+
+## validateAuthHMAC
 
 -   **See: <https://help.shopify.com/en/api/getting-started/authentication/oauth#verification>**
 
-Express style middleware for validating auth related calls from Shopify. It will set a `validSignature` flag on the express `request` object
+Parses the url and validates the HMAC provided by shopify
 
 ### Parameters
 
 -   `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+    -   `options.url` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
     -   `options.secret` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 
 ### Examples
 
 ```javascript
-app.use(authHMACMiddleware({
-  secret: 'hush',
-}));
+// General
+const validHMAC = validateAuthHMAC({ url, secret: 'hush' });
 
-app.get('*', req => {
-  if (req.validSignature !== true) {
-    // Forged request
-  }
-  // From Shopify
+// Express
+app.use(req => {
+  const validHMAC = validateAuthHMAC({ url: req.url, secret: 'hush' });
 });
 ```
 
-## proxyHMACMiddleware
+Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** 
+
+## validateProxyHMAC
 
 -   **See: <https://help.shopify.com/en/api/guides/application-proxies>**
 
-Express style middleware for validating proxied requests from Shopify. It will set a `validSignature` flag on the express `request` object
+Parses the url and validates proxied requests from Shopify
 
 ### Parameters
 
 -   `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+    -   `options.url` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
     -   `options.secret` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 
 ### Examples
 
 ```javascript
-app.use(proxyHMACMiddleware({
-  secret: 'hush',
-}));
+// General
+const validHMAC = validateProxyHMAC({ url, secret: 'hush' });
 
-app.get('*', req => {
-  if (req.validSignature !== true) {
-    // Forged request
-  }
-  // From Shopify
+// Express
+app.use(req => {
+  const validHMAC = validateProxyHMAC({ url: req.url, secret: 'hush' });
 });
 ```
+
+Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** 

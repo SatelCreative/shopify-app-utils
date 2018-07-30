@@ -2,3 +2,4 @@ toc:
   - computeHMAC
   - authHMACMiddleware
   - proxyHMACMiddleware
+  - validateShopifyDomain
