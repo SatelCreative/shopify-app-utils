@@ -32,6 +32,8 @@ or
 -   [validateShopifyDomain](#validateshopifydomain)
     -   [Parameters](#parameters-3)
     -   [Examples](#examples-3)
+-   [validateShopifyTimestamp](#validateshopifytimestamp)
+    -   [Parameters](#parameters-4)
 
 ## computeHMAC
 
@@ -120,5 +122,20 @@ Checks if a string is a valid `.myshopify.com` domain (exclude the protocol)
 ```javascript
 const validShopifyDomain = validateShopifyDomain({ shop: 'my-shop.myshopify.com' });
 ```
+
+Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** 
+
+## validateShopifyTimestamp
+
+Verifies the shopify timestamp generally provided with authenticated responses from shopify
+
+### Parameters
+
+-   `$0` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+    -   `$0.timestamp`  
+    -   `$0.margin`   (optional, default `60`)
+-   `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+-   `timestamp` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+-   `margin` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Timestamp must be withing margin of now (optional, default `60`)
 
 Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** 
