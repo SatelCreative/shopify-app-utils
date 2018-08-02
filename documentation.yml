@@ -1,6 +1,7 @@
 toc:
   - parseRequest
   - ParsedRequest
+  - generateRedirect
   - computeHMAC
   - validateAuthHMAC
   - validateProxyHMAC

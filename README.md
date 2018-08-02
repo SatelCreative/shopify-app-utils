@@ -25,23 +25,26 @@ or
     -   [Examples](#examples)
 -   [ParsedRequest](#parsedrequest)
     -   [Properties](#properties)
--   [computeHMAC](#computehmac)
+-   [generateRedirect](#generateredirect)
     -   [Parameters](#parameters-1)
     -   [Examples](#examples-1)
--   [validateAuthHMAC](#validateauthhmac)
+-   [computeHMAC](#computehmac)
     -   [Parameters](#parameters-2)
     -   [Examples](#examples-2)
--   [validateProxyHMAC](#validateproxyhmac)
+-   [validateAuthHMAC](#validateauthhmac)
     -   [Parameters](#parameters-3)
     -   [Examples](#examples-3)
--   [validateDomain](#validatedomain)
+-   [validateProxyHMAC](#validateproxyhmac)
     -   [Parameters](#parameters-4)
     -   [Examples](#examples-4)
--   [validateTimestamp](#validatetimestamp)
+-   [validateDomain](#validatedomain)
     -   [Parameters](#parameters-5)
     -   [Examples](#examples-5)
--   [generateJSRedirect](#generatejsredirect)
+-   [validateTimestamp](#validatetimestamp)
     -   [Parameters](#parameters-6)
+    -   [Examples](#examples-6)
+-   [generateJSRedirect](#generatejsredirect)
+    -   [Parameters](#parameters-7)
 
 ## parseRequest
 
@@ -88,6 +91,51 @@ Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Globa
 -   `shop` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 -   `malformed` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** 
 -   `fromShopify` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** 
+
+## generateRedirect
+
+Generates the url / html based redirect to start the oauth2 process
+
+### Parameters
+
+-   `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+    -   `options.shop` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+    -   `options.apiKey` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+    -   `options.nonce` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+    -   `options.redirect` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+    -   `options.scopes` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** 
+    -   `options.online` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)**  (optional, default `false`)
+    -   `options.iframe` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)**  (optional, default `false`)
+
+### Examples
+
+```javascript
+// Full Page App
+res.redirect(
+  generateRedirect({
+    shop: 'example.myshopify.com',
+    apiKey: 'MY_APP_API_KEY',
+    nonce: 'unique-request-identifier',
+    redirect: 'https://my-app.com/path/to/redirect',
+    scopes: ['read_products', 'write_products', 'etc'],
+  }),
+);
+
+// Embedded online app
+res.send(
+  generateRedirect({
+    shop: 'example.myshopify.com',
+    apiKey: 'MY_APP_API_KEY',
+    nonce: 'unique-request-identifier',
+    redirect: 'https://my-app.com/path/to/redirect',
+    scopes: ['read_products', 'write_products', 'etc'],
+    online: true,
+    iframe: true,
+  }),
+);
+```
+
+Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 
 ## computeHMAC
 
