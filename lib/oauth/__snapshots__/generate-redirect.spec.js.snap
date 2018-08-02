@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Generate Redirect should generate a url 1`] = `"https://example.myshopify.com/admin/oauth/authorize?client_id=key&state=nonce&redirect_uri=https%3A%2F%2Fexample.com&scope=read_products"`;
+
+exports[`Generate Redirect should generate an iframe redirect 1`] = `"<!DOCTYPE html><html><head><script type=\\"text/javascript\\">window.top.location.href = \\"https://example.myshopify.com/admin/oauth/authorize?client_id=key&state=nonce&redirect_uri=https://example.com&scope=read_products\\"</script></head></html>"`;
+
+exports[`Generate Redirect should generate an online url 1`] = `"https://example.myshopify.com/admin/oauth/authorize?client_id=key&state=nonce&redirect_uri=https%3A%2F%2Fexample.com&scope=read_products&grant_options%5B%5D=per-user"`;
