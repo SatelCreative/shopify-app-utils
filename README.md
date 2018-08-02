@@ -20,20 +20,74 @@ or
 
 ### Table of Contents
 
--   [computeHMAC](#computehmac)
+-   [parseRequest](#parserequest)
     -   [Parameters](#parameters)
     -   [Examples](#examples)
--   [validateAuthHMAC](#validateauthhmac)
+-   [ParsedRequest](#parsedrequest)
+    -   [Properties](#properties)
+-   [computeHMAC](#computehmac)
     -   [Parameters](#parameters-1)
     -   [Examples](#examples-1)
--   [validateProxyHMAC](#validateproxyhmac)
+-   [validateAuthHMAC](#validateauthhmac)
     -   [Parameters](#parameters-2)
     -   [Examples](#examples-2)
--   [validateShopifyDomain](#validateshopifydomain)
+-   [validateProxyHMAC](#validateproxyhmac)
     -   [Parameters](#parameters-3)
     -   [Examples](#examples-3)
--   [validateShopifyTimestamp](#validateshopifytimestamp)
+-   [validateDomain](#validatedomain)
     -   [Parameters](#parameters-4)
+    -   [Examples](#examples-4)
+-   [validateTimestamp](#validatetimestamp)
+    -   [Parameters](#parameters-5)
+    -   [Examples](#examples-5)
+-   [generateJSRedirect](#generatejsredirect)
+    -   [Parameters](#parameters-6)
+
+## parseRequest
+
+Parses a url and makes determining the next step more user friendly. Handles validation of shop, hmac, and timestamp
+
+### Parameters
+
+-   `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+    -   `options.url` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+    -   `options.secret` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+    -   `options.margin` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)**  (optional, default `60`)
+
+### Examples
+
+```javascript
+const { shop, malformed, fromShopify } = parseRequest({
+ url: req.url,
+ secret: SHARED_SECRET,
+});
+
+if (fromShopify) {
+ // App store install or returning user
+}
+
+if (shop && !malformed) {
+ // Unlisted installation
+}
+
+if (!shop && !malformed) {
+ // Homepage
+}
+
+// etc
+```
+
+Returns **[ParsedRequest](#parsedrequest)** 
+
+## ParsedRequest
+
+Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)
+
+### Properties
+
+-   `shop` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+-   `malformed` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** 
+-   `fromShopify` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** 
 
 ## computeHMAC
 
@@ -108,7 +162,7 @@ app.use(req => {
 
 Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** 
 
-## validateShopifyDomain
+## validateDomain
 
 Checks if a string is a valid `.myshopify.com` domain (exclude the protocol)
 
@@ -120,12 +174,12 @@ Checks if a string is a valid `.myshopify.com` domain (exclude the protocol)
 ### Examples
 
 ```javascript
-const validShopifyDomain = validateShopifyDomain({ shop: 'my-shop.myshopify.com' });
+const validDomain = validateDomain({ shop: 'my-shop.myshopify.com' });
 ```
 
 Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** 
 
-## validateShopifyTimestamp
+## validateTimestamp
 
 Verifies the shopify timestamp generally provided with authenticated responses from shopify
 
@@ -138,4 +192,21 @@ Verifies the shopify timestamp generally provided with authenticated responses f
 -   `timestamp` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 -   `margin` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Timestamp must be withing margin of now (optional, default `60`)
 
+### Examples
+
+```javascript
+const validTimestamp = validateTimestamp({ timestamp: '1533160800', margin: 60 * 5 });
+```
+
 Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** 
+
+## generateJSRedirect
+
+Pass in a url and it returns an html document that will redirect top rather than the iFrame
+
+### Parameters
+
+-   `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+    -   `options.url` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+
+Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 

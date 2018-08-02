@@ -1,6 +1,9 @@
 toc:
+  - parseRequest
+  - ParsedRequest
   - computeHMAC
   - validateAuthHMAC
   - validateProxyHMAC
-  - validateShopifyDomain
-  - validateShopifyTimestamp
+  - validateDomain
+  - validateTimestamp
+  - generateJSRedirect
