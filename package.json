@@ -31,7 +31,9 @@
   "directories": {
     "lib": "lib"
   },
-  "dependencies": {},
+  "dependencies": {
+    "node-fetch": "^2.2.0"
+  },
   "devDependencies": {
     "documentation": "^8.0.2",
     "dotenv-cli": "^1.4.0",
