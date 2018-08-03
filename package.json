@@ -32,7 +32,9 @@
     "lib": "lib"
   },
   "dependencies": {
-    "node-fetch": "^2.2.0"
+    "jsonwebtoken": "^8.3.0",
+    "node-fetch": "^2.2.0",
+    "shortid": "^2.2.12"
   },
   "devDependencies": {
     "documentation": "^8.0.2",
