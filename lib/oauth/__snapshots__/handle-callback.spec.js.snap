@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Handle Callback should fail on invalid nonce 1`] = `
+Array [
+  Object {
+    "nonce": "my-state",
+    "shop": "example.myshopify.com",
+  },
+]
+`;
+
+exports[`Handle Callback should return token when request is valid 1`] = `
+Array [
+  Object {
+    "client_id": "api-key",
+    "client_secret": "hunter2",
+    "code": "my-code",
+  },
+]
+`;
+
+exports[`Handle Callback should return token when request is valid 2`] = `
+Array [
+  Object {
+    "nonce": "my-state",
+    "shop": "example.myshopify.com",
+  },
+]
+`;
+
+exports[`Handle Callback should return token when request is valid 3`] = `
+Array [
+  Object {
+    "jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZXMiOlsicmVhZF9wcm9kdWN0cyJdLCJzaG9wIjoiZXhhbXBsZS5teXNob3BpZnkuY29tIiwiaWF0IjoxNTMzMTYwODAwfQ.jIeMf0i_zhj31Byb-FCq68T5TRfVqAOfkBTEFAL0c18",
+    "scopes": Array [
+      "read_products",
+    ],
+    "shop": "example.myshopify.com",
+    "token": "access_token",
+  },
+]
+`;
