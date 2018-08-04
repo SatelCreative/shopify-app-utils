@@ -1,5 +1,7 @@
 # About
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/SatelCreative/shopify-app-utils.svg)](https://greenkeeper.io/)
+
 Provides functionality for some of the more tedious requirements when building a Shopify app such as consistent hmac validation behavior for authentication, proxies, etc. Provided as general use functions but can easily be adapted for use as express middleware.
 
 This is not meant to be a _batteries included_ solution. For that checkout [`shopify-express`](https://github.com/Shopify/shopify-express)
