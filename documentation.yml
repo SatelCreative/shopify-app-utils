@@ -1,10 +1,5 @@
 toc:
-  - parseRequest
-  - ParsedRequest
-  - generateRedirect
-  - computeHMAC
-  - validateAuthHMAC
-  - validateProxyHMAC
-  - validateDomain
-  - validateTimestamp
-  - generateJSRedirect
+  - validateRequest
+  - generateNonce
+  - onAuthenticated
+  - onRedirect

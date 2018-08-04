@@ -20,31 +20,106 @@ or
 
 ### Table of Contents
 
--   [parseRequest](#parserequest)
+-   [validateRequest](#validaterequest)
     -   [Parameters](#parameters)
-    -   [Examples](#examples)
+-   [generateNonce](#generatenonce)
+    -   [Parameters](#parameters-1)
+-   [onAuthenticated](#onauthenticated)
+    -   [Parameters](#parameters-2)
+-   [onRedirect](#onredirect)
+    -   [Parameters](#parameters-3)
 -   [ParsedRequest](#parsedrequest)
     -   [Properties](#properties)
--   [generateRedirect](#generateredirect)
-    -   [Parameters](#parameters-1)
-    -   [Examples](#examples-1)
--   [computeHMAC](#computehmac)
-    -   [Parameters](#parameters-2)
-    -   [Examples](#examples-2)
--   [validateAuthHMAC](#validateauthhmac)
-    -   [Parameters](#parameters-3)
-    -   [Examples](#examples-3)
--   [validateProxyHMAC](#validateproxyhmac)
+-   [parseRequest](#parserequest)
     -   [Parameters](#parameters-4)
-    -   [Examples](#examples-4)
--   [validateDomain](#validatedomain)
-    -   [Parameters](#parameters-5)
-    -   [Examples](#examples-5)
+    -   [Examples](#examples)
 -   [validateTimestamp](#validatetimestamp)
+    -   [Parameters](#parameters-5)
+    -   [Examples](#examples-1)
+-   [validateAuthHMAC](#validateauthhmac)
     -   [Parameters](#parameters-6)
-    -   [Examples](#examples-6)
--   [generateJSRedirect](#generatejsredirect)
+    -   [Examples](#examples-2)
+-   [generateRedirect](#generateredirect)
     -   [Parameters](#parameters-7)
+    -   [Examples](#examples-3)
+-   [generateJSRedirect](#generatejsredirect)
+    -   [Parameters](#parameters-8)
+-   [validateDomain](#validatedomain)
+    -   [Parameters](#parameters-9)
+    -   [Examples](#examples-4)
+-   [validateHMAC](#validatehmac)
+    -   [Parameters](#parameters-10)
+    -   [Examples](#examples-5)
+-   [computeHMAC](#computehmac)
+    -   [Parameters](#parameters-11)
+    -   [Examples](#examples-6)
+
+## validateRequest
+
+TODO
+
+### Parameters
+
+-   `options` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+    -   `options.url` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** url of the request to validate
+    -   `options.jwt` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** jwt associated with the current request
+    -   `options.host` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the base url of the app
+    -   `options.redirectRoute` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the route where oauth2 redirects will be handled
+    -   `options.scopes` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** scopes your app will require
+    -   `options.key` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** shopify app api key
+    -   `options.secret` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** shopify app shared secret
+    -   `options.online` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** do you require an online token (optional, default `false`)
+    -   `options.offline` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** do you require an offline token (optional, default `false`)
+    -   `options.generateNonce` **[generateNonce](#generatenonce)** 
+    -   `options.onAuthenticated` **[onAuthenticated](#onauthenticated)** 
+    -   `options.onRedirect` **[onRedirect](#onredirect)** 
+
+## generateNonce
+
+Used to generate a nonce to be used in a redirect url
+
+Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)
+
+### Parameters
+
+-   `options` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+    -   `options.shop` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the .myshopify domain
+
+Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+
+## onAuthenticated
+
+Called when a request is authorized
+
+Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)
+
+### Parameters
+
+-   `options` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+    -   `options.shop` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the .myshopify domain
+    -   `options.scopes` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)>** // TODO
+
+## onRedirect
+
+Called when a redirect is required
+
+Type: [Function](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function)
+
+### Parameters
+
+-   `options` **[object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+    -   `options.url` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** the redirect url
+    -   `options.html` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** a js based redirect for use in iframes
+
+## ParsedRequest
+
+Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)
+
+### Properties
+
+-   `shop` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+-   `malformed` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** 
+-   `fromShopify` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** 
 
 ## parseRequest
 
@@ -82,15 +157,52 @@ if (!shop && !malformed) {
 
 Returns **[ParsedRequest](#parsedrequest)** 
 
-## ParsedRequest
+## validateTimestamp
 
-Type: [Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)
+Verifies the shopify timestamp generally provided with authenticated responses from shopify
 
-### Properties
+### Parameters
 
--   `shop` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
--   `malformed` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** 
--   `fromShopify` **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** 
+-   `$0` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+    -   `$0.timestamp`  
+    -   `$0.margin`   (optional, default `60`)
+-   `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+-   `timestamp` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+-   `margin` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Timestamp must be withing margin of now (optional, default `60`)
+
+### Examples
+
+```javascript
+const validTimestamp = validateTimestamp({ timestamp: '1533160800', margin: 60 * 5 });
+```
+
+Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** 
+
+## validateAuthHMAC
+
+-   **See: <https://help.shopify.com/en/api/getting-started/authentication/oauth#verification>**
+
+Parses the url and validates the HMAC provided by shopify
+
+### Parameters
+
+-   `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+    -   `options.url` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+    -   `options.secret` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+
+### Examples
+
+```javascript
+// General
+const validHMAC = validateAuthHMAC({ url, secret: 'hush' });
+
+// Express
+app.use(req => {
+  const validHMAC = validateAuthHMAC({ url: req.url, secret: 'hush' });
+});
+```
+
+Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** 
 
 ## generateRedirect
 
@@ -137,78 +249,16 @@ res.send(
 
 Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 
-## computeHMAC
+## generateJSRedirect
 
-Produces a hex encoded Sha256 hmac
+Pass in a url and it returns an html document that will redirect top rather than the iFrame
 
 ### Parameters
 
 -   `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
-    -   `options.text` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
-    -   `options.secret` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
-
-### Examples
-
-```javascript
-const hash = computeHMAC({
-  text: 'message',
-  secret: 'hush',
-});
-```
+    -   `options.url` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
 
 Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
-
-## validateAuthHMAC
-
--   **See: <https://help.shopify.com/en/api/getting-started/authentication/oauth#verification>**
-
-Parses the url and validates the HMAC provided by shopify
-
-### Parameters
-
--   `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
-    -   `options.url` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
-    -   `options.secret` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
-
-### Examples
-
-```javascript
-// General
-const validHMAC = validateAuthHMAC({ url, secret: 'hush' });
-
-// Express
-app.use(req => {
-  const validHMAC = validateAuthHMAC({ url: req.url, secret: 'hush' });
-});
-```
-
-Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** 
-
-## validateProxyHMAC
-
--   **See: <https://help.shopify.com/en/api/guides/application-proxies>**
-
-Parses the url and validates proxied requests from Shopify
-
-### Parameters
-
--   `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
-    -   `options.url` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
-    -   `options.secret` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
-
-### Examples
-
-```javascript
-// General
-const validHMAC = validateProxyHMAC({ url, secret: 'hush' });
-
-// Express
-app.use(req => {
-  const validHMAC = validateProxyHMAC({ url: req.url, secret: 'hush' });
-});
-```
-
-Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** 
 
 ## validateDomain
 
@@ -227,34 +277,49 @@ const validDomain = validateDomain({ shop: 'my-shop.myshopify.com' });
 
 Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** 
 
-## validateTimestamp
+## validateHMAC
 
-Verifies the shopify timestamp generally provided with authenticated responses from shopify
+-   **See: <https://help.shopify.com/en/api/guides/application-proxies>**
 
-### Parameters
-
--   `$0` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
-    -   `$0.timestamp`  
-    -   `$0.margin`   (optional, default `60`)
--   `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
--   `timestamp` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
--   `margin` **[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)** Timestamp must be withing margin of now (optional, default `60`)
-
-### Examples
-
-```javascript
-const validTimestamp = validateTimestamp({ timestamp: '1533160800', margin: 60 * 5 });
-```
-
-Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** 
-
-## generateJSRedirect
-
-Pass in a url and it returns an html document that will redirect top rather than the iFrame
+Parses the url and validates proxied requests from Shopify
 
 ### Parameters
 
 -   `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
     -   `options.url` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+    -   `options.secret` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+
+### Examples
+
+```javascript
+// General
+const validHMAC = validateHMAC({ url, secret: 'hush' });
+
+// Express
+app.use(req => {
+  const validHMAC = validateHMAC({ url: req.url, secret: 'hush' });
+});
+```
+
+Returns **[boolean](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** 
+
+## computeHMAC
+
+Produces a hex encoded Sha256 hmac
+
+### Parameters
+
+-   `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+    -   `options.text` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+    -   `options.secret` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+
+### Examples
+
+```javascript
+const hash = computeHMAC({
+  text: 'message',
+  secret: 'hush',
+});
+```
 
 Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
