@@ -31,12 +31,16 @@ Array [
 exports[`Handle Callback should return token when request is valid 3`] = `
 Array [
   Object {
-    "jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZXMiOlsicmVhZF9wcm9kdWN0cyJdLCJzaG9wIjoiZXhhbXBsZS5teXNob3BpZnkuY29tIiwiaWF0IjoxNTMzMTYwODAwfQ.jIeMf0i_zhj31Byb-FCq68T5TRfVqAOfkBTEFAL0c18",
-    "scopes": Array [
+    "appScope": Array [
       "read_products",
     ],
+    "jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBTY29wZSI6WyJyZWFkX3Byb2R1Y3RzIl0sInVzZXJTY29wZSI6WyJyZWFkX3Byb2R1Y3RzIl0sInNob3AiOiJleGFtcGxlLm15c2hvcGlmeS5jb20iLCJpYXQiOjE1MzMxNjA4MDB9.XlIMQ-gE51LC5yyJxr0Duhs_w1EkTi4E-2MFRDEcTr8",
+    "online": true,
     "shop": "example.myshopify.com",
     "token": "access_token",
+    "userScope": Array [
+      "read_products",
+    ],
   },
 ]
 `;
