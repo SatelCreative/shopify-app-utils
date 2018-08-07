@@ -1,5 +1,11 @@
 toc:
+  - createOAuth
   - validateRequest
-  - generateNonce
-  - onAuthenticated
-  - onRedirect
+  - validateRequest~generateNonce
+  - validateRequest~onAuthenticated
+  - validateRequest~onRedirect
+  - validateRequest~onFailed
+  - handleCallback
+  - handleCallback~validateNonce
+  - handleCallback~onAuthenticated
+  - handleCallback~onFailed
