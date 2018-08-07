@@ -1,15 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`oauth/validateRequest Should authenticate as expected in online mode 1`] = `
+exports[`oauth/validateRequest should authenticate as expected in online mode 1`] = `
 Object {
-  "scopes": Array [
-    "read_products",
-  ],
+  "decoded": Object {
+    "iat": 1533160800,
+    "scopes": Array [
+      "read_products",
+    ],
+    "shop": "example.myshopify.com",
+  },
   "shop": "example.myshopify.com",
 }
 `;
 
-exports[`oauth/validateRequest Should redirect as expected in online mode 1`] = `
+exports[`oauth/validateRequest should redirect as expected in online mode 1`] = `
 Object {
   "html": "<!DOCTYPE html><html><head><script type=\\"text/javascript\\">window.top.location.href = \\"https://example.myshopify.com/admin/oauth/authorize?client_id=app-key&state=nonce-example.myshopify.com&redirect_uri=https%3A%2F%2Fexample.com%2Fredirect&scope=read_products&grant_options%5B%5D=per-user\\"</script></head></html>",
   "url": "https://example.myshopify.com/admin/oauth/authorize?client_id=app-key&state=nonce-example.myshopify.com&redirect_uri=https%3A%2F%2Fexample.com%2Fredirect&scope=read_products&grant_options%5B%5D=per-user",
