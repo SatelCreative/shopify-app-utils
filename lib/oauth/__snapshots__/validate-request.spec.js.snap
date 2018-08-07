@@ -2,14 +2,16 @@
 
 exports[`oauth/validateRequest should authenticate as expected in online mode 1`] = `
 Object {
+  "appScope": Array [
+    "read_products",
+  ],
   "decoded": Object {
     "iat": 1533160800,
-    "scopes": Array [
-      "read_products",
-    ],
-    "shop": "example.myshopify.com",
   },
   "shop": "example.myshopify.com",
+  "userScope": Array [
+    "read_products",
+  ],
 }
 `;
 
