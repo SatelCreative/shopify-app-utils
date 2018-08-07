@@ -1,6 +1,11 @@
 toc:
-  - computeHMAC
-  - validateAuthHMAC
-  - validateProxyHMAC
-  - validateShopifyDomain
-  - validateShopifyTimestamp
+  - createOAuth
+  - validateRequest
+  - validateRequest~generateNonce
+  - validateRequest~onAuthenticated
+  - validateRequest~onRedirect
+  - validateRequest~onFailed
+  - handleCallback
+  - handleCallback~validateNonce
+  - handleCallback~onAuthenticated
+  - handleCallback~onFailed

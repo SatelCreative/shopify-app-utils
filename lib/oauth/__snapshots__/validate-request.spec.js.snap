@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`oauth/validateRequest should authenticate as expected in online mode 1`] = `
+Array [
+  Object {
+    "appScope": Array [
+      "read_products",
+    ],
+    "decoded": Object {
+      "iat": 1533160800,
+    },
+    "shop": "example.myshopify.com",
+    "userScope": Array [
+      "read_products",
+    ],
+  },
+]
+`;
+
+exports[`oauth/validateRequest should not authenticate invalid jwt 1`] = `Array []`;
+
+exports[`oauth/validateRequest should redirect as expected in online mode 1`] = `
+Object {
+  "html": "<!DOCTYPE html><html><head><script type=\\"text/javascript\\">window.top.location.href = \\"https://example.myshopify.com/admin/oauth/authorize?client_id=app-key&state=nonce-example.myshopify.com&redirect_uri=https%3A%2F%2Fexample.com%2Fredirect&scope=read_products&grant_options%5B%5D=per-user\\"</script></head></html>",
+  "url": "https://example.myshopify.com/admin/oauth/authorize?client_id=app-key&state=nonce-example.myshopify.com&redirect_uri=https%3A%2F%2Fexample.com%2Fredirect&scope=read_products&grant_options%5B%5D=per-user",
+}
+`;
+
+exports[`oauth/validateRequest should redirect invalid jwt with shop param 1`] = `
+Array [
+  Object {
+    "html": "<!DOCTYPE html><html><head><script type=\\"text/javascript\\">window.top.location.href = \\"https://example.myshopify.com/admin/oauth/authorize?client_id=app-key&state=nonce-example.myshopify.com&redirect_uri=https%3A%2F%2Fexample.com%2Fredirect&scope=read_products&grant_options%5B%5D=per-user\\"</script></head></html>",
+    "url": "https://example.myshopify.com/admin/oauth/authorize?client_id=app-key&state=nonce-example.myshopify.com&redirect_uri=https%3A%2F%2Fexample.com%2Fredirect&scope=read_products&grant_options%5B%5D=per-user",
+  },
+]
+`;

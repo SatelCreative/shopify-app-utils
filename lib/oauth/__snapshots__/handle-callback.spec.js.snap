@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Handle Callback should fail on invalid hmac 1`] = `Array []`;
+
+exports[`Handle Callback should fail on invalid nonce 1`] = `
+Array [
+  Object {
+    "nonce": "my-state",
+    "shop": "example.myshopify.com",
+  },
+]
+`;
+
+exports[`Handle Callback should fail on invalid nonce 2`] = `Array []`;
+
+exports[`Handle Callback should return token when request is valid 1`] = `
+Array [
+  Object {
+    "client_id": "api-key",
+    "client_secret": "hunter2",
+    "code": "my-code",
+  },
+]
+`;
+
+exports[`Handle Callback should return token when request is valid 2`] = `
+Array [
+  Object {
+    "nonce": "my-state",
+    "shop": "example.myshopify.com",
+  },
+]
+`;
+
+exports[`Handle Callback should return token when request is valid 3`] = `
+Array [
+  Object {
+    "appScope": Array [
+      "read_products",
+    ],
+    "jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBTY29wZSI6WyJyZWFkX3Byb2R1Y3RzIl0sInVzZXJTY29wZSI6WyJyZWFkX3Byb2R1Y3RzIl0sInNob3AiOiJleGFtcGxlLm15c2hvcGlmeS5jb20iLCJpYXQiOjE1MzMxNjA4MDB9.XlIMQ-gE51LC5yyJxr0Duhs_w1EkTi4E-2MFRDEcTr8",
+    "online": true,
+    "shop": "example.myshopify.com",
+    "token": "access_token",
+    "userScope": Array [
+      "read_products",
+    ],
+  },
+]
+`;
